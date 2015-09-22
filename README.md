@@ -1,46 +1,54 @@
-RESTful API in Yii 2 Advanced Application Template
-==================================================
+Yii 2 Advanced Project Template
+===============================
 
-Yii2 Advanced Application Template with RESTful API configured. Take a look at http://budiirawan.com/setup-restful-api-yii2/ for more detail explanation
+Yii 2 Advanced Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
+developing complex Web applications with multiple tiers.
 
-## Install Composer Packages
-You need [Composer](http://getcomposer.org) installed first.
-```
-composer self-update
-```
-```
-composer install
-```
+The template includes three tiers: front end, back end, and console, each of which
+is a separate Yii application.
 
-## Run Yii Init
-Open terminal and go to the project folder and run
+The template is designed to work in a team development environment. It supports
+deploying the application in different environments.
 
-Mac/Linux
-```
-php ./init
-```
+Documentation is at [docs/guide/README.md](docs/guide/README.md).
 
-Windows
-```
-init
-```
-Choose **development** environment and finish the steps.
+[![Latest Stable Version](https://poser.pugx.org/yiisoft/yii2-app-advanced/v/stable.png)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
+[![Total Downloads](https://poser.pugx.org/yiisoft/yii2-app-advanced/downloads.png)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
+[![Build Status](https://travis-ci.org/yiisoft/yii2-app-advanced.svg?branch=master)](https://travis-ci.org/yiisoft/yii2-app-advanced)
 
-## Configure Database
-create your database and configure it in **common/config/main-local.php**
-
-## Run Database Migration
-This command will create new country table and populate its data
+DIRECTORY STRUCTURE
+-------------------
 
 ```
-./yii migrate
+common
+    config/              contains shared configurations
+    mail/                contains view files for e-mails
+    models/              contains model classes used in both backend and frontend
+console
+    config/              contains console configurations
+    controllers/         contains console controllers (commands)
+    migrations/          contains database migrations
+    models/              contains console-specific model classes
+    runtime/             contains files generated during runtime
+backend
+    assets/              contains application assets such as JavaScript and CSS
+    config/              contains backend configurations
+    controllers/         contains Web controller classes
+    models/              contains backend-specific model classes
+    runtime/             contains files generated during runtime
+    views/               contains view files for the Web application
+    web/                 contains the entry script and Web resources
+frontend
+    assets/              contains application assets such as JavaScript and CSS
+    config/              contains frontend configurations
+    controllers/         contains Web controller classes
+    models/              contains frontend-specific model classes
+    runtime/             contains files generated during runtime
+    views/               contains view files for the Web application
+    web/                 contains the entry script and Web resources
+    widgets/             contains frontend widgets
+vendor/                  contains dependent 3rd-party packages
+environments/            contains environment-based overrides
+tests                    contains various tests for the advanced application
+    codeception/         contains tests developed with Codeception PHP Testing Framework
 ```
-
-## Enable Mod Rewrite if you use Apache
-Make sure you already enable this mod. Follow this [Tutorial](http://stackoverflow.com/questions/869092/how-to-enable-mod-rewrite-for-apache-2-2)
-
-
-
-
-
-

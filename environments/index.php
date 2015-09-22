@@ -9,8 +9,20 @@
  * return [
  *     'environment name' => [
  *         'path' => 'directory storing the local files',
- *         'writable' => [
+ *         'skipFiles'  => [
+ *             // list of files that should only copied once and skipped if they already exist
+ *         ],
+ *         'setWritable' => [
  *             // list of directories that should be set writable
+ *         ],
+ *         'setExecutable' => [
+ *             // list of files that should be set executable
+ *         ],
+ *         'setCookieValidationKey' => [
+ *             // list of config files that need to be inserted with automatically generated cookie validation keys
+ *         ],
+ *         'createSymlink' => [
+ *             // list of symlinks to be created. Keys are symlinks, and values are the targets.
  *         ],
  *     ],
  * ];
@@ -19,26 +31,35 @@
 return [
     'Development' => [
         'path' => 'dev',
-        'writable' => [
+        'setWritable' => [
             'backend/runtime',
             'backend/web/assets',
             'frontend/runtime',
             'frontend/web/assets',
         ],
-        'executable' => [
+        'setExecutable' => [
             'yii',
+            'tests/codeception/bin/yii',
+        ],
+        'setCookieValidationKey' => [
+            'backend/config/main-local.php',
+            'frontend/config/main-local.php',
         ],
     ],
     'Production' => [
         'path' => 'prod',
-        'writable' => [
+        'setWritable' => [
             'backend/runtime',
             'backend/web/assets',
             'frontend/runtime',
             'frontend/web/assets',
         ],
-        'executable' => [
+        'setExecutable' => [
             'yii',
+        ],
+        'setCookieValidationKey' => [
+            'backend/config/main-local.php',
+            'frontend/config/main-local.php',
         ],
     ],
 ];
