@@ -49,4 +49,5 @@ class SignupFormTest extends DbTestCase
             ],
         ];
     }
+
 }
