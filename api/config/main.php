@@ -1,14 +1,14 @@
 <?php
- 
+
 $params = array_merge(
-    require(__DIR__ . '/../../common/config/params.php'),
-    require(__DIR__ . '/../../common/config/params-local.php'),
-    require(__DIR__ . '/params.php'),
-    require(__DIR__ . '/params-local.php')
+        require(__DIR__ . '/../../common/config/params.php'), 
+        require(__DIR__ . '/../../common/config/params-local.php'), 
+        require(__DIR__ . '/params.php'), 
+        require(__DIR__ . '/params-local.php')
 );
- 
-return [
-    'id' => 'restful-api',
+
+$config = [
+    'id' => 'yii2-restful-api',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'modules' => [
@@ -44,7 +44,7 @@ return [
             'rules' => [
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => ['v1/country', 'v1/user'],   // our country api rule,
+                    'controller' => ['v1/country', 'v1/user'], // our api rule,
                     'tokens' => [
                         '{id}' => '<id:\\w+>'
                     ]
@@ -54,3 +54,5 @@ return [
     ],
     'params' => $params,
 ];
+
+return $config;

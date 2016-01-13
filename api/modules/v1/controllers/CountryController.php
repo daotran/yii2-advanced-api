@@ -15,6 +15,10 @@ class CountryController extends ActiveController
 }
 
 /*
+ * Whether to automatically pluralize the URL names for controllers. 
+ * If true, a controller ID will appear in plural form in URLs. 
+ * For example, user controller will appear as users in URLs.
+ * 
 GET /countries: list all countries
 HEAD /countries: show the overview information of country listing
 POST /countries: create a new country

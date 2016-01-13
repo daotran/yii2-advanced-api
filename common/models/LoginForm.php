@@ -9,6 +9,7 @@ use yii\base\Model;
  */
 class LoginForm extends Model
 {
+    // define some attributes. Each attribute is like a publicly accessible property of a model.
     public $username;
     public $password;
     public $rememberMe = true;
