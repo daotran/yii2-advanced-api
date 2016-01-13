@@ -15,7 +15,8 @@ class Country extends ActiveRecord
      */
     public static function tableName()
     {
-        return 'country';
+        //return 'country'; OR using as below:
+        return '{{%country}}';
     }
  
     /**

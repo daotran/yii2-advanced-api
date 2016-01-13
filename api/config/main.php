@@ -8,7 +8,7 @@ $params = array_merge(
 );
  
 return [
-    'id' => 'app-api',
+    'id' => 'restful-api',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'modules' => [
