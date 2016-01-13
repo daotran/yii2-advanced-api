@@ -18,6 +18,12 @@ return [
         ]
     ],
     'components' => [
+        'request' => [
+            // Enable JSON Input:
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
+        ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => false,
@@ -38,7 +44,7 @@ return [
             'rules' => [
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => 'v1/country',   // our country api rule,
+                    'controller' => ['v1/country', 'v1/user'],   // our country api rule,
                     'tokens' => [
                         '{id}' => '<id:\\w+>'
                     ]
