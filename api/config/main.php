@@ -44,7 +44,7 @@ $config = [
             'rules' => [
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => ['v1/country', 'v1/user'], // our api rule,
+                    'controller' => ['v1/country', 'v1/user', 'v1/category'], // our api rule,
                     'tokens' => [
                         '{id}' => '<id:\\w+>'
                     ]
