@@ -67,8 +67,29 @@ class Category extends ActiveRecord implements Linkable {
 
     public function getLinks() {
         return [
-            Link::REL_SELF => Url::to(['categories/', 'id' => $this->id], true)
+            Link::REL_SELF => Url::to(['categories/view', 'id' => $this->id], true)
         ];
+    }
+
+    /*
+     * How to use RATE LIMITING
+     * You may want to limit the API usage of each user to be at most 100 API calls within a period of 10 minutes.
+     * If too many requests are received from a user within the stated period of the time, a response with status
+     * code 429 (meaning "Too Many Requests") should be returned.
+     */
+
+    public function getRateLimit($request, $action) {
+        return [$this->rateLimit, 1]; // $rateLimit requests per second
+    }
+
+    public function loadAllowance($request, $action) {
+        return [$this->allowance, $this->allowance_updated_at];
+    }
+
+    public function saveAllowance($request, $action, $allowance, $timestamp) {
+        $this->allowance = $allowance;
+        $this->allowance_updated_at = $timestamp;
+        $this->save();
     }
 
 }

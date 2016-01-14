@@ -24,6 +24,10 @@ $config = [
                 'application/json' => 'yii\web\JsonParser',
             ]
         ],
+        'response' => [
+            'format' => yii\web\Response::FORMAT_JSON,
+            'charset' => 'UTF-8',
+        ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => false,
@@ -47,7 +51,10 @@ $config = [
                     'controller' => ['v1/country', 'v1/user', 'v1/category', 'v1/post'], // our api rule,
                     'tokens' => [
                         '{id}' => '<id:\\w+>'
-                    ]
+                    ],
+                    'extraPatterns' => [
+                        'GET search' => 'search',
+                    ],
                 ]
             ],
         ]
