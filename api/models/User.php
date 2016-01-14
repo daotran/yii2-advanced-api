@@ -173,6 +173,7 @@ class User extends ActiveRecord implements IdentityInterface {
 
     /*
      * Practice Yii2 Restful API
+     * Added by dennis
      */
 
     public function fields() {
@@ -187,7 +188,7 @@ class User extends ActiveRecord implements IdentityInterface {
             },
         ];
     }
-    
+
     const SCENARIO_LOGIN = 'login';
     const SCENARIO_REGISTER = 'register';
 
@@ -195,8 +196,8 @@ class User extends ActiveRecord implements IdentityInterface {
      * By default, the scenarios supported by a model are determined by the validation rules declared in the model. 
      * However, you can customize this behavior by overriding the yii\base\Model::scenarios() method, like the following:
      */
-    public function scenarios()
-    {
+
+    public function scenarios() {
         $scenarios = parent::scenarios();
         $scenarios[self::SCENARIO_LOGIN] = ['username', 'password'];
         $scenarios[self::SCENARIO_REGISTER] = ['username', 'email', 'password'];
