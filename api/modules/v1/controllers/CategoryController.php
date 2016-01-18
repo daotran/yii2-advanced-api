@@ -72,6 +72,14 @@ class CategoryController extends ActiveController {
         return $actions;
     }
 
+    public function verbs() {
+
+        $verbs = [
+            'search' => ['GET']
+        ];
+        return array_merge(parent::verbs(), $verbs);
+    }
+
     public function actionView($id) {
 
         if (isset($id)) {
