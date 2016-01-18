@@ -23,14 +23,26 @@ $config = [
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
             ]
-        ],
+        ], // config error handling
         'response' => [
             'format' => yii\web\Response::FORMAT_JSON,
             'charset' => 'UTF-8',
+            'class' => 'yii\web\Response',
+            'on beforeSend' => function ($event) {
+                $response = $event->sender;
+                if ($response->data !== null && Yii::$app->request->get('suppress_response_code')) {
+                    $response->data = [
+                        'success' => $response->isSuccessful,
+                        'data' => $response->data,
+                    ];
+                    $response->statusCode = 200;
+                }
+            },
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'api\common\models\User',
             'enableAutoLogin' => false,
+            'enableSession' => false,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -53,9 +65,10 @@ $config = [
                         '{id}' => '<id:\\w+>'
                     ],
                     'extraPatterns' => [
-                        'GET search' => 'search',
+                        'GET search' => 'search'
                     ],
-                ]
+                ],
+                'controller/test/<parameter:\w+>' => 'controller/test', //REST Yii2 activecontroller passing a text parameter
             ],
         ]
     ],

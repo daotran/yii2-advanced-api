@@ -27,6 +27,7 @@ class CountryController extends ActiveController {
                 'application/json' => Response::FORMAT_JSON,
             ],
         ];
+
         return $behaviors;
     }
 
