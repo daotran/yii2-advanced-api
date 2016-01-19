@@ -3,7 +3,6 @@
 namespace api\common\models;
 
 use Yii;
-use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
@@ -53,6 +52,20 @@ class User extends ActiveRecord implements IdentityInterface {
         ];
     }
 
+    /*
+     * Set the token before saving the user. Now, you have an auth_key for each user
+     */
+
+    public function beforeSave($insert) {
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                $this->auth_key = Yii::$app->getSecurity()->generateRandomString();
+            }
+            return true;
+        }
+        return false;
+    }
+
     /**
      * @inheritdoc
      */
@@ -64,8 +77,8 @@ class User extends ActiveRecord implements IdentityInterface {
      * @inheritdoc
      */
     public static function findIdentityByAccessToken($token, $type = null) {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
-        //return static::findOne(['access_token' => $token]);
+        //throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+        return static::findOne(['access_token' => $token]);
     }
 
     /**
@@ -177,17 +190,23 @@ class User extends ActiveRecord implements IdentityInterface {
      * Added by dennis
      */
 
+//    public function fields() {
+//        return [
+//            // field name is the same as the attribute name
+//            'id',
+//            // field name is "email", the corresponding attribute name is "email_address"
+//            //'email' => 'email_address',
+//            // field name is "name", its value is defined by a PHP callback
+//            'name' => function ($model) {
+//                return $model->username;
+//            },
+//        ];
+//    }
     public function fields() {
-        return [
-            // field name is the same as the attribute name
-            'id',
-            // field name is "email", the corresponding attribute name is "email_address"
-            //'email' => 'email_address',
-            // field name is "name", its value is defined by a PHP callback
-            'name' => function ($model) {
-                return $model->username;
-            },
-        ];
+        $fields = parent::fields();
+        // remove fields that contain sensitive information
+        unset($fields['auth_key'], $fields['password_hash'], $fields['password_reset_token']);
+        return $fields;
     }
 
     const SCENARIO_LOGIN = 'login';

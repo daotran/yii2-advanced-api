@@ -15,7 +15,10 @@ $config = [
         'v1' => [
             'basePath' => '@app/modules/v1',
             'class' => 'api\modules\v1\Module'   // here is our v1 modules
-        ]
+        ],
+        'gii' => [
+            'class' => 'yii\gii\Module',
+        ],
     ],
     'components' => [
         'request' => [
@@ -39,11 +42,13 @@ $config = [
                 }
             },
         ],
+        // UserIdentity
         'user' => [
             'identityClass' => 'api\common\models\User',
             'enableAutoLogin' => false,
             'enableSession' => false,
         ],
+        // Logging
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -53,10 +58,14 @@ $config = [
                 ],
             ],
         ],
+        // Caching
+        'cache' => [
+            'class' => 'yii\caching\FileCache',
+        ],
         'urlManager' => [
-            'enablePrettyUrl' => true,
+            'enablePrettyUrl' => true,  // Disable r = routes
             'enableStrictParsing' => true,
-            'showScriptName' => false,
+            'showScriptName' => false, // Disable index.php
             'rules' => [
                 [
                     'class' => 'yii\rest\UrlRule',
@@ -65,7 +74,7 @@ $config = [
                         '{id}' => '<id:\\w+>'
                     ],
                     'extraPatterns' => [
-                        'GET search' => 'search'
+                        'GET search' => 'search',
                     ],
                 ],
                 'controller/test/<parameter:\w+>' => 'controller/test', //REST Yii2 activecontroller passing a text parameter

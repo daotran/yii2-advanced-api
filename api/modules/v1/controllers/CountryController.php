@@ -17,10 +17,7 @@ class CountryController extends ActiveController {
     public $modelClass = 'api\modules\v1\models\Country';
 
     public function behaviors() {
-//        $behaviors = parent::behaviors();
-//        $behaviors['authenticator'] = [
-//            'class' => QueryParamAuth::className(),
-//        ];
+        $behaviors = parent::behaviors();
         $behaviors['bootstrap'] = [
             'class' => ContentNegotiator::className(),
             'formats' => [

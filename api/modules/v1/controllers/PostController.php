@@ -19,7 +19,7 @@ class PostController extends ActiveController {
     public $modelClass = 'api\modules\v1\models\Post';
 
     public function behaviors() {
-
+        $behaviors = parent::behaviors();
         $behaviors['bootstrap'] = [
             'class' => ContentNegotiator::className(),
             'formats' => [
@@ -42,7 +42,7 @@ class PostController extends ActiveController {
         unset($actions['view']);
         return $actions;
     }
-    
+
     public function actionView($id) {
 
         if (isset($id)) {
@@ -51,7 +51,5 @@ class PostController extends ActiveController {
             throw new HttpException(404);
         }
     }
-
-    
 
 }
